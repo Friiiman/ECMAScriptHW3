@@ -77,17 +77,20 @@ class Product {
 class Order {
   constructor(id) {
     this.id = id;
-    this.products = new Array();
   }
 
+  products = [];
   addProduct(product) {
     this.products.push(product);
   }
   getTotalPrice() {
-    let totalPrice = 0;
-    this.products.forEach((element) => {
-      totalPrice += element.price * element.quantity;
-    });
+    const totalPrice = this.products.reduce((total, product) => {
+      total += product.price * product.quantity;
+      return total;
+    }, 0);
+    // this.products.forEach((element) => {
+    //   totalPrice += element.price * element.quantity;
+    // });
     return totalPrice;
   }
 }
